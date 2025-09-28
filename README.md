@@ -23,18 +23,23 @@ Think of it as a **v0 / Lovable-inspired site builder** that turns your ideas in
 ```bash
 git clone https://github.com/your-username/Webify.ai-v2.git
 cd Webify.ai-v2
+```
 
 2. **Set up a virtual environment**
 ```bash
 python -m venv venv
+```
 
 3. **Install dependencies**
 ```bash
 pip install -r requirements.txt
+```
 
 4. **Set up your OpenAI API key in .env**
 ```bash
 OPENAI_API_KEY=your_api_key_here
+```
+
 
 
 
