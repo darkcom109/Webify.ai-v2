@@ -1,7 +1,7 @@
 ﻿# 🕸️ Webify.ai-v2
 
 A fast **AI-powered website generator** for smaller, clean websites, built with Flask + OpenAI's Responses API.  
-Webify.ai-v2 is the successor to **Webify.ai-v1** — rebuilt from the ground up to be faster, cleaner, and far more polished.  
+Webify.ai-v2 is the successor to **Webify.ai** — rebuilt from the ground up to be faster, cleaner, and far more polished.  
 Think of it as a **v0 / Lovable-inspired site builder** that turns your ideas into a quick prototype
 
 ---
@@ -35,6 +35,7 @@ pip install -r requirements.txt
 4. **Set up your OpenAI API key in .env**
 ```bash
 OPENAI_API_KEY=your_api_key_here
+
 
 
 
