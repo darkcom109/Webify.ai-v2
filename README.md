@@ -22,7 +22,7 @@ AI-assisted frontend design; implemented backend and APIs from scratch.
 
 1. **Clone the repo**
 ```bash
-git clone https://github.com/your-username/Webify.ai-v2.git
+git clone https://github.com/darkcom109/Webify.ai-v2.git
 cd Webify.ai-v2
 ```
 
@@ -40,6 +40,7 @@ pip install -r requirements.txt
 ```bash
 OPENAI_API_KEY=your_api_key_here
 ```
+
 
 
 
