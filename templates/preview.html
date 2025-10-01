@@ -8,10 +8,44 @@
   <style>body { font-family: 'Inter', sans-serif; }</style>
 </head>
 <body class="bg-gray-50">
-    {{ generated_html|safe }}
 
-    <div class="text-center mt-10">
-        <a href="/" class="text-blue-600 hover:underline">&larr; Back to Editor</a>
-    </div>
+  <!-- Rendered site -->
+  <div id="preview">
+    {{ generated_html | safe }}
+  </div>
+
+  <!-- Buttons -->
+  <div class="text-center mt-10 flex flex-col gap-4 items-center">
+    <button id="toggleCode"
+      class="inline-flex items-center gap-2 px-5 py-2 rounded-lg bg-gray-800 text-white font-medium hover:bg-gray-700 transition">
+      Show Code
+    </button>
+
+    <a href="/" 
+      class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 text-blue-600 font-medium hover:bg-blue-100 hover:text-blue-700 transition">
+      <span class="text-lg">&larr;</span>
+      Back to Editor
+    </a>
+  </div>
+
+  <!-- Code block (hidden by default) -->
+  <div id="codeBlock" class="max-w-4xl mx-auto mt-6 hidden">
+    <pre class="bg-gray-900 text-green-300 p-4 rounded-lg overflow-x-auto text-sm">
+<code>{{ generated_html | e }}</code>
+    </pre>
+  </div>
+
+  <script>
+    const btn = document.getElementById("toggleCode");
+    const codeBlock = document.getElementById("codeBlock");
+    let showing = false;
+
+    btn.addEventListener("click", () => {
+      showing = !showing;
+      codeBlock.classList.toggle("hidden", !showing);
+      btn.textContent = showing ? "Hide Code" : "Show Code";
+    });
+  </script>
+
 </body>
 </html>
