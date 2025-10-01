@@ -5,147 +5,141 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Webify — AI Website Builder</title>
 
-  <!-- Inter font -->
+  <!-- Inter font (fast path) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <link href="static/style.css" rel="stylesheet">
 
-  <!-- Tailwind CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: { sans: ['Inter', 'ui-sans-serif', 'system-ui'] },
-        }
-      }
-    }
-  </script>
+  <!-- Bootstrap (CSS only, very small core, fast parse) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
   <style>
-    /* Subtle dotted grid overlay */
-    .grid-overlay {
-      background-image:
-        radial-gradient(rgba(255,255,255,0.08) 1px, transparent 1px);
-      background-size: 18px 18px;
-      mask-image: radial-gradient(ellipse at center, black 60%, transparent 100%);
-    }
+    :root { --bg: #0f172a; --muted: #94a3b8; }
+    html, body { height: 100%; }
+    body { font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, 'Helvetica Neue', Arial, sans-serif; background: var(--bg); color: #e2e8f0; }
+    .page-wrap { min-height: 100dvh; display: flex; flex-direction: column; }
+    .top-nav { position: sticky; top: 0; z-index: 1030; backdrop-filter: saturate(140%) blur(6px); background: rgba(15, 23, 42, 0.45); border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .brand-dot { width: 28px; height: 28px; border-radius: 8px; background: linear-gradient(135deg,#818cf8,#e879f9); display:inline-block; }
+    .hero { padding-top: 4.5rem; padding-bottom: 2rem; }
+    .muted { color: var(--muted); }
+    .card-lite { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08); }
+    .form-control, .form-select { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12); color: #e2e8f0; }
+    .form-control::placeholder { color: #94a3b8; }
+    .form-control:focus { background: rgba(255,255,255,0.07); color: #e2e8f0; border-color: #6273ff; box-shadow: 0 0 0 .25rem rgba(99,102,241,.25); }
+    .btn-gradient { background: linear-gradient(90deg,#6366f1,#22d3ee,#a78bfa); background-size: 200% 200%; color:#fff; border: 0; }
+    .btn-gradient:hover { filter: brightness(1.05); }
+    .badge-soft { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); color:#cbd5e1; }
+    footer { border-top: 1px solid rgba(255,255,255,0.08); }
+    /* Loading overlay */
+    #loading-overlay { position: fixed; inset: 0; display: none; align-items: center; justify-content: center; z-index: 1050; }
+    #loading-overlay .backdrop { position:absolute; inset:0; background: rgba(15,23,42,0.7); backdrop-filter: blur(3px); }
+    #loading-overlay .panel { position: relative; z-index:1; width: 100%; max-width: 420px; }
   </style>
 </head>
-<body class="font-sans bg-slate-950 text-slate-100 min-h-screen antialiased relative overflow-x-hidden">
+<body>
+  <div class="page-wrap">
 
-  <!-- Decorative gradient blobs -->
-  <div aria-hidden="true" class="pointer-events-none absolute -top-24 -left-24 w-[38rem] h-[38rem] rounded-full blur-3xl opacity-30"
-       style="background: radial-gradient(circle at 30% 30%, #7c3aed, transparent 60%)"></div>
-  <div aria-hidden="true" class="pointer-events-none absolute -bottom-32 -right-24 w-[40rem] h-[40rem] rounded-full blur-3xl opacity-30"
-       style="background: radial-gradient(circle at 70% 70%, #2563eb, transparent 55%)"></div>
-  <div aria-hidden="true" class="grid-overlay absolute inset-0 opacity-30"></div>
-
-  <!-- Navbar -->
-  <nav class="fixed top-0 inset-x-0 z-40">
-    <div class="mx-auto max-w-6xl px-4 py-3">
-      <div class="flex items-center justify-between rounded-2xl bg-white/10 backdrop-blur-md border border-white/10 px-4 py-2 shadow-glow">
-        <div class="flex items-center gap-2">
-          <div class="h-8 w-8 rounded-xl bg-gradient-to-br from-indigo-400 to-fuchsia-500"></div>
-          <span class="font-extrabold tracking-tight">Webify</span>
-        </div>
-        <div class="hidden sm:flex items-center gap-4 text-sm text-slate-200">
-          <a href="https://github.com/darkcom109/Webify.ai-v2" class="inline-flex items-center gap-2 rounded-xl bg-white/10 px-3 py-1.5 hover:bg-white/15 transition border border-white/10">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 opacity-80" fill="currentColor" viewBox="0 0 24 24"><path d="M12 .5C5.73.5.9 5.33.9 11.6c0 4.88 3.16 9.02 7.55 10.48.55.1.75-.24.75-.53v-2c-3.07.68-3.72-1.32-3.72-1.32-.5-1.27-1.22-1.61-1.22-1.61-.99-.68.07-.67.07-.67 1.1.08 1.67 1.13 1.67 1.13.98 1.67 2.58 1.19 3.2.91.1-.71.38-1.19.69-1.46-2.45-.28-5.02-1.22-5.02-5.43 0-1.2.43-2.18 1.13-2.95-.11-.28-.49-1.42.11-2.96 0 0 .92-.29 3.02 1.13.88-.24 1.83-.36 2.77-.36.94 0 1.89.12 2.77.36 2.1-1.42 3.02-1.13 3.02-1.13.6 1.54.22 2.68.11 2.96.7.77 1.13 1.75 1.13 2.95 0 4.22-2.58 5.15-5.03 5.43.4.34.73.99.73 2v2.96c0 .29.2.64.76.53 4.39-1.46 7.55-5.6 7.55-10.48C23.1 5.33 18.27.5 12 .5Z"/></svg>
-            <span>GitHub</span>
-          </a>
+    <!-- Navbar -->
+    <nav class="top-nav">
+      <div class="container py-2">
+        <div class="d-flex align-items-center justify-content-between">
+          <div class="d-flex align-items-center gap-2">
+            <span class="brand-dot"></span>
+            <strong class="fs-5">Webify</strong>
+          </div>
+          <div class="d-none d-sm-flex">
+            <a href="https://github.com/darkcom109/Webify.ai-v2" class="btn btn-sm btn-outline-light opacity-75">
+              GitHub
+            </a>
+          </div>
         </div>
       </div>
-    </div>
-  </nav>
+    </nav>
 
-  <!-- Hero / Form -->
-  <header class="relative pt-28 pb-16">
-    <div class="mx-auto max-w-6xl px-4">
-      <div class="text-center max-w-3xl mx-auto">
-        <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-white/10 border border-white/10">
-          <span class="h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span>
-          Powered by OpenAI Responses API
-        </span>
-        <h1 class="mt-5 text-4xl md:text-6xl font-extrabold leading-tight tracking-tight">
-          Build beautiful websites <span class="bg-gradient-to-r from-indigo-400 via-sky-400 to-fuchsia-400 bg-clip-text text-transparent">with one prompt</span>
-        </h1>
-        <p class="mt-4 text-slate-300 text-lg">
-          Describe your idea, pick a vibe, and let Webify craft a polished, responsive site with Tailwind — in seconds.
-        </p>
-      </div>
+    <!-- Hero -->
+    <header class="hero">
+      <div class="container">
+        <div class="text-center mx-auto" style="max-width: 54rem;">
+          <span class="badge badge-soft rounded-pill px-3 py-2 small">
+            <span class="align-middle me-2" style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#34d399;"></span>
+            Powered by OpenAI Responses API
+          </span>
 
-      <!-- Form Card -->
-      <section class="mt-10 flex items-center justify-center">
-        <form action="/" method="POST"
-              class="w-full max-w-2xl bg-white/10 backdrop-blur-xl border border-white/10 rounded-3xl p-8 md:p-10 shadow-glow">
-          <label for="prompt" class="block text-sm font-semibold text-slate-200 mb-2">
-            Website Description
-          </label>
-          <textarea id="prompt" name="prompt" rows="5"
-            class="w-full rounded-2xl bg-white/5 text-slate-100 placeholder-slate-400 border border-white/10 focus:border-indigo-400 focus:ring-4 focus:ring-indigo-500/25 outline-none p-4 md:p-5 transition mb-5 resize-y"
-            placeholder="E.g. A modern SaaS landing page with hero, feature grid, pricing, testimonials, and a call-to-action."></textarea>
-
-          <!-- Prompt chips -->
-          <div class="flex flex-wrap gap-2 mb-6 text-sm">
-            <button type="button" data-prompt="A minimal portfolio with hero, projects grid, and contact form (dark mode first)."
-              class="px-3 py-1.5 rounded-xl bg-white/10 border border-white/10 hover:bg-white/15 transition">Portfolio</button>
-            <button type="button" data-prompt="A coffee shop landing page with menu highlights, photo gallery, map, and newsletter signup."
-              class="px-3 py-1.5 rounded-xl bg-white/10 border border-white/10 hover:bg-white/15 transition">Coffee Shop</button>
-            <button type="button" data-prompt="A fitness app page with hero, feature icons, pricing tiers, FAQ, and app store badges."
-              class="px-3 py-1.5 rounded-xl bg-white/10 border border-white/10 hover:bg-white/15 transition">Fitness App</button>
-            <button type="button" data-prompt="A conference site with schedule, speakers grid, tickets CTA, and venue info."
-              class="px-3 py-1.5 rounded-xl bg-white/10 border border-white/10 hover:bg-white/15 transition">Conference</button>
-          </div>
-
-          <div class="grid gap-3 sm:grid-cols-[1fr_auto]">
-            <div class="relative">
-              <input id="style" name="style" type="text" placeholder="Optional: tone (e.g. Minimal · Playful · Premium)"
-                     class="w-full rounded-2xl bg-white/5 text-slate-100 placeholder-slate-400 border border-white/10 focus:border-indigo-400 focus:ring-4 focus:ring-indigo-500/25 outline-none px-4 py-3 transition">
-              <span class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></span>
-            </div>
-            <button id="generateBtn" type="submit"
-              class="inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-indigo-500 via-sky-500 to-fuchsia-500 bg-[length:200%_200%] animate-gradient-x text-white font-semibold px-6 py-3 shadow-lg hover:shadow-xl hover:scale-[1.01] active:scale-[0.98] transition-all">
-              <svg id="btnSpinner" class="hidden h-5 w-5 animate-spin" viewBox="0 0 24 24" fill="none">
-                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
-              </svg>
-              <span id="btnText">Generate Website</span>
-            </button>
-          </div>
-
-          <p class="mt-4 text-xs text-slate-400">
-            Tip: Be specific about sections (hero, features, pricing, FAQ) and the vibe (minimal, bold, premium).
+          <h1 class="fw-bold display-5 mt-4">
+            Build beautiful websites <span style="background: linear-gradient(90deg,#818cf8,#22d3ee,#f0abfc); -webkit-background-clip: text; background-clip: text; color: transparent;">with one prompt</span>
+          </h1>
+          <p class="lead muted mt-3">
+            Describe your idea, pick a vibe, and let Webify craft a polished, responsive site — in seconds.
           </p>
-        </form>
-      </section>
-    </div>
-  </header>
+        </div>
 
-  <!-- Footer -->
-  <footer class=>
-    <div class="mx-auto max-w-6xl px-4 py-10 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-slate-400">
-      <span class="mx-auto">© <span id="year"></span> Webify. All rights reserved.</span>
-    </div>
-  </footer>
+        <!-- Form Card -->
+        <section class="mt-4 d-flex justify-content-center">
+          <form action="/" method="POST" class="card card-lite shadow-sm p-4 p-md-5" style="width:100%;max-width:680px;">
+            <div class="mb-2">
+              <label for="prompt" class="form-label fw-semibold">Website Description</label>
+              <textarea id="prompt" name="prompt" rows="5" class="form-control" placeholder="E.g. A SaaS landing page with hero, feature grid, pricing, testimonials, and a call-to-action."></textarea>
+            </div>
+
+            <!-- Prompt chips -->
+            <div class="d-flex flex-wrap gap-2 mb-3">
+              <button type="button" data-prompt="A minimal portfolio with hero, projects grid, and contact form (dark mode first)." class="btn btn-sm btn-outline-secondary">Portfolio</button>
+              <button type="button" data-prompt="A coffee shop landing page with menu highlights, photo gallery, map, and newsletter signup." class="btn btn-sm btn-outline-secondary">Coffee Shop</button>
+              <button type="button" data-prompt="A fitness app page with hero, feature icons, pricing tiers, FAQ, and app store badges." class="btn btn-sm btn-outline-secondary">Fitness App</button>
+              <button type="button" data-prompt="A conference site with schedule, speakers grid, tickets CTA, and venue info." class="btn btn-sm btn-outline-secondary">Conference</button>
+            </div>
+
+            <div class="row g-2 align-items-stretch">
+              <div class="col-12 col-sm">
+                <input id="style" name="style" type="text" class="form-control" placeholder="Optional: tone (e.g. Minimal · Playful · Premium)">
+              </div>
+              <div class="col-12 col-sm-auto d-grid">
+                <button id="generateBtn" type="submit" class="btn btn-gradient fw-semibold">
+                  <span id="btnSpinner" class="spinner-border spinner-border-sm me-2 d-none" role="status" aria-hidden="true"></span>
+                  <span id="btnText">Generate Website</span>
+                </button>
+              </div>
+            </div>
+
+            <p class="form-text mt-3" style="color:#94a3b8;">
+              Tip: Be specific about sections (hero, features, pricing, FAQ) and the vibe (minimal, bold, premium).
+            </p>
+          </form>
+        </section>
+      </div>
+    </header>
+
+    <!-- Footer -->
+    <footer class="mt-auto">
+      <div class="container py-4 text-center small muted">
+        © <span id="year"></span> Webify. All rights reserved.
+      </div>
+    </footer>
+  </div>
 
   <!-- Loading overlay -->
-  <div id="loading-overlay" class="hidden fixed inset-0 z-50 flex items-center justify-center">
-    <div class="absolute inset-0 bg-slate-950/70 backdrop-blur-sm"></div>
-    <div class="relative z-10 w-full max-w-sm rounded-2xl bg-slate-900 border border-white/10 p-6 shadow-2xl text-center">
-      <div class="mx-auto h-12 w-12 rounded-full border-4 border-indigo-500 border-t-transparent animate-spin"></div>
-      <p class="mt-4 font-semibold text-slate-100">Generating your website…</p>
-      <p class="mt-1 text-xs text-slate-400">This usually takes a few seconds.</p>
+  <div id="loading-overlay" aria-hidden="true">
+    <div class="backdrop"></div>
+    <div class="panel mx-auto">
+      <div class="card card-lite p-4 text-center">
+        <div class="d-flex justify-content-center">
+          <div class="spinner-border text-info" role="status" aria-hidden="true"></div>
+        </div>
+        <p class="fw-semibold mt-3 mb-1">Generating your website…</p>
+        <p class="small muted mb-0">This usually takes a few seconds.</p>
+      </div>
     </div>
   </div>
 
-  <!-- Scripts -->
+  <!-- Bootstrap JS (bundle) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
+
+  <!-- Minimal JS (no frameworks) -->
   <script>
     // Year
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Loading & button state
+    // Elements
     const form = document.querySelector('form');
     const loadingOverlay = document.getElementById('loading-overlay');
     const btn = document.getElementById('generateBtn');
@@ -158,6 +152,7 @@
     const saved = localStorage.getItem('webify_prompt');
     if (saved && !promptEl.value) promptEl.value = saved;
 
+    // Chips fill
     chips.forEach(chip => {
       chip.addEventListener('click', () => {
         promptEl.value = chip.dataset.prompt;
@@ -165,14 +160,15 @@
       });
     });
 
+    // Submit handling
     if (form) {
       form.addEventListener('submit', () => {
         // Save prompt
-        localStorage.setItem('webify_prompt', promptEl.value.trim());
+        localStorage.setItem('webify_prompt', (promptEl.value || '').trim());
         // Show overlay + lock button
-        loadingOverlay.classList.remove('hidden');
+        loadingOverlay.style.display = 'flex';
         btn.disabled = true;
-        btnSpinner.classList.remove('hidden');
+        btnSpinner.classList.remove('d-none');
         btnText.textContent = 'Generating…';
       });
     }
