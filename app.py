@@ -1,8 +1,9 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 from utils.model import generate
+import os
 
 app = Flask(__name__)
-app.secret_key = "super-secret-key"  # Required for session support
+app.secret_key = os.getenv("APP_SECRET_KEY")
 
 @app.route("/", methods=["GET", "POST"])
 def index():
