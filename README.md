@@ -10,7 +10,8 @@ AI-assisted frontend design; implemented backend and APIs from scratch.
 ---
 <img width="959" height="445" alt="image" src="https://github.com/user-attachments/assets/6261a19c-88c7-4f52-ba47-6bc27d63f326" />
 ---
-<img width="959" height="445" alt="2025-10-02" src="https://github.com/user-attachments/assets/cf07f39b-9360-4250-ab69-30218c52e168" />
+<img width="960" height="443" alt="2025-10-02" src="https://github.com/user-attachments/assets/e0c03d9b-f309-4b95-a972-2c88be61e8ef" />
+
 ---
 
 ### ✨ Features
@@ -46,6 +47,7 @@ pip install -r requirements.txt
 ```bash
 OPENAI_API_KEY=your_api_key_here
 ```
+
 
 
 
