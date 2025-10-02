@@ -5,7 +5,12 @@ Webify.ai-v2 is the successor to **Webify.ai** — rebuilt from the ground up to
 Think of it as a **v0 / Lovable-inspired site builder** that turns your ideas into a quick prototype.
 AI-assisted frontend design; implemented backend and APIs from scratch.
 
-
+---
+<img width="959" height="445" alt="image" src="https://github.com/user-attachments/assets/089cc25c-c18c-42bb-8128-88171faea3b6" />
+---
+<img width="959" height="445" alt="image" src="https://github.com/user-attachments/assets/6261a19c-88c7-4f52-ba47-6bc27d63f326" />
+---
+<img width="959" height="446" alt="image" src="https://github.com/user-attachments/assets/37171d0e-5532-4011-a046-9e59dd1ae1b6" />
 ---
 
 ### ✨ Features
@@ -41,6 +46,7 @@ pip install -r requirements.txt
 ```bash
 OPENAI_API_KEY=your_api_key_here
 ```
+
 
 
 
