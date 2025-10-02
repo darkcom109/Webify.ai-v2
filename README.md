@@ -17,7 +17,7 @@ AI-assisted frontend design; implemented backend and APIs from scratch.
 ### ✨ Features
 
 - ⚡ **AI Website Generation** – Just describe the site you want, and Webify builds it for you.  
-- 🎨 **Tailwind CSS Styling** – Modern, responsive designs out of the box.  
+- 🎨 **Bootstrap + Tailwind CSS Styling** – Modern, responsive designs out of the box.  
 - 🧠 **Improved Model Integration** – Uses the `o3` with `max_output_tokens` for long, coherent outputs.  
 - 🖼 **Live Preview Page** – See the generated site on its own page, not just in a box.  
 - 🔄 **Regeneration Support** – Easily tweak prompts and generate again.  
@@ -47,6 +47,7 @@ pip install -r requirements.txt
 ```bash
 OPENAI_API_KEY=your_api_key_here
 ```
+
 
 
 
